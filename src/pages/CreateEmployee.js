@@ -125,7 +125,12 @@ const CreateEmployee = () => {
                         />
 
                         <label for="state">State</label>
-                        <select name="state" id="state" onChange={stateChange}>
+                        <select
+                            name="state"
+                            id="state"
+                            onChange={stateChange}
+                            value={state}
+                        >
                             {STATES.map((state) => (
                                 <option>{state.name}</option>
                             ))}
@@ -136,6 +141,7 @@ const CreateEmployee = () => {
                             id="zip-code"
                             type="number"
                             onChange={zipCodeChange}
+                            defaultValue={zipCode}
                         />
                     </fieldset>
 
@@ -144,6 +150,7 @@ const CreateEmployee = () => {
                         name="department"
                         id="department"
                         onChange={departmentChange}
+                        value={department}
                     >
                         {DEPARTMENTS.map((department) => (
                             <option>{department.name}</option>
