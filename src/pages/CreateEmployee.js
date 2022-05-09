@@ -4,6 +4,8 @@ import DEPARTMENTS from '../constants/departments'
 import STATES from '../constants/states'
 import { addEmployee } from '../features/employee'
 import { Link, useNavigate } from 'react-router-dom'
+import Calendar from 'react-calendar'
+import { convertDateToString } from '../utils/utils'
 
 /**
  * Create employee page
@@ -17,8 +19,8 @@ const CreateEmployee = () => {
     // state variables for the form
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [dateOfBirth, setDateOfBirth] = useState('')
-    const [startDate, setStartDate] = useState('')
+    const [dateOfBirth, setDateOfBirth] = useState(new Date())
+    const [startDate, setStartDate] = useState(new Date())
     const [street, setStreet] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState(false)
@@ -33,16 +35,6 @@ const CreateEmployee = () => {
     // handle Last Name change event
     const lastNameChange = (event) => {
         setLastName(event.target.value)
-    }
-
-    // handle Date of Birth me change event
-    const dateOfBirthChange = (event) => {
-        setDateOfBirth(event.target.value)
-    }
-
-    // handle Start Date me change event
-    const startDateChange = (event) => {
-        setStartDate(event.target.value)
     }
 
     // handle Street me change event
@@ -76,8 +68,8 @@ const CreateEmployee = () => {
             addEmployee({
                 firstName,
                 lastName,
-                dateOfBirth,
-                startDate,
+                dateOfBirth: convertDateToString(dateOfBirth),
+                startDate: convertDateToString(startDate),
                 street,
                 state,
                 zipCode,
@@ -113,19 +105,17 @@ const CreateEmployee = () => {
                     />
 
                     <label htmlFor="date-of-birth">Date of Birth</label>
-                    <input
+                    <Calendar
                         id="date-of-birth"
-                        type="text"
-                        onChange={dateOfBirthChange}
-                        defaultValue={dateOfBirth}
+                        onChange={setDateOfBirth}
+                        value={dateOfBirth}
                     />
 
                     <label htmlFor="start-date">Start Date</label>
-                    <input
+                    <Calendar
                         id="start-date"
-                        type="text"
-                        onChange={startDateChange}
-                        defaultValue={startDate}
+                        onChange={setStartDate}
+                        value={startDate}
                     />
 
                     <fieldset className="address">
@@ -154,8 +144,10 @@ const CreateEmployee = () => {
                             onChange={stateChange}
                             value={state}
                         >
-                            {STATES.map((state) => (
-                                <option>{state.name}</option>
+                            {STATES.map((state, idx) => (
+                                <option key={'state-' + idx}>
+                                    {state.name}
+                                </option>
                             ))}
                         </select>
 
@@ -175,8 +167,10 @@ const CreateEmployee = () => {
                         onChange={departmentChange}
                         value={department}
                     >
-                        {DEPARTMENTS.map((department) => (
-                            <option>{department.name}</option>
+                        {DEPARTMENTS.map((department, idx) => (
+                            <option key={'dep-' + idx}>
+                                {department.name}
+                            </option>
                         ))}
                     </select>
                     <button>Save</button>
