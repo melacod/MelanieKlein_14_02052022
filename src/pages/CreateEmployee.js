@@ -6,6 +6,7 @@ import { addEmployee } from '../features/employee'
 import { Link, useNavigate } from 'react-router-dom'
 import Calendar from 'react-calendar'
 import { convertDateToString } from '../utils/utils'
+import { Picker } from '@react-native-picker/picker'
 
 /**
  * Create employee page
@@ -45,11 +46,6 @@ const CreateEmployee = () => {
     // handle City me change event
     const cityChange = (event) => {
         setCity(event.target.value)
-    }
-
-    // handle State me change event
-    const stateChange = (event) => {
-        setState(event.target.select)
     }
 
     // handle Zip Code me change event
@@ -138,18 +134,22 @@ const CreateEmployee = () => {
                         />
 
                         <label htmlFor="state">State</label>
-                        <select
-                            name="state"
+                        <Picker
                             id="state"
-                            onChange={stateChange}
-                            value={state}
+                            className="picker"
+                            selectedValue={state}
+                            onValueChange={(itemValue, itemIndex) =>
+                                setState(itemValue)
+                            }
                         >
                             {STATES.map((state, idx) => (
-                                <option key={'state-' + idx}>
-                                    {state.name}
-                                </option>
+                                <Picker.Item
+                                    key={'state-' + idx}
+                                    label={state.name}
+                                    value={state.name}
+                                />
                             ))}
-                        </select>
+                        </Picker>
 
                         <label htmlFor="zip-code">Zip Code</label>
                         <input
@@ -161,19 +161,25 @@ const CreateEmployee = () => {
                     </fieldset>
 
                     <label htmlFor="department">Department</label>
-                    <select
-                        name="department"
+                    <Picker
                         id="department"
-                        onChange={departmentChange}
-                        value={department}
+                        className="picker"
+                        selectedValue={department}
+                        onValueChange={(itemValue, itemIndex) =>
+                            setDepartment(itemValue)
+                        }
                     >
                         {DEPARTMENTS.map((department, idx) => (
-                            <option key={'dep-' + idx}>
-                                {department.name}
-                            </option>
+                            <Picker.Item
+                                key={'department-' + idx}
+                                label={department.name}
+                                value={department.name}
+                            />
                         ))}
-                    </select>
-                    <button>Save</button>
+                    </Picker>
+                    <div>
+                        <button>Save</button>
+                    </div>
                 </form>
             </div>
             <div id="confirmation" className="modal">
