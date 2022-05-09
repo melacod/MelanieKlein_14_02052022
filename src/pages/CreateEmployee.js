@@ -24,9 +24,9 @@ const CreateEmployee = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [street, setStreet] = useState('')
     const [city, setCity] = useState('')
-    const [state, setState] = useState(false)
+    const [state, setState] = useState(STATES[0].name)
     const [zipCode, setZipCode] = useState('')
-    const [department, setDepartment] = useState(false)
+    const [department, setDepartment] = useState(DEPARTMENTS[0].name)
 
     // handle First Name change event
     const firstNameChange = (event) => {
@@ -51,11 +51,6 @@ const CreateEmployee = () => {
     // handle Zip Code me change event
     const zipCodeChange = (event) => {
         setZipCode(event.target.value)
-    }
-
-    // handle Department me change event
-    const departmentChange = (event) => {
-        setDepartment(event.target.select)
     }
 
     const handleSubmit = (event) => {
