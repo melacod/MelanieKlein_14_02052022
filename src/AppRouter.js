@@ -11,7 +11,7 @@ const AppRouter = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/index" element={<CreateEmployee />} />
+                <Route path="/" element={<CreateEmployee />} />
                 <Route path="/employee-list" element={<CurrentEmployees />} />
             </Routes>
         </Router>

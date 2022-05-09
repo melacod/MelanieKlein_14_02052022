@@ -6,12 +6,18 @@ import { createSlice } from '@reduxjs/toolkit'
  * @category EmployeeState
  */
 const initialState = {
-    data: {
-        email: null,
-        password: null,
-        firstName: null,
-        lastName: null,
-    },
+    employeeList: [],
+}
+
+/**
+ * Employee state actions and reducers
+ * @returns actions and reducers
+ * @category UserState
+ */
+export function addEmployee(employeeToAdd) {
+    return async (dispatch, getState) => {
+        dispatch(actions.addEmployee(employeeToAdd))
+    }
 }
 
 /**
@@ -22,7 +28,12 @@ const initialState = {
 const { actions, reducer } = createSlice({
     name: 'employee',
     initialState,
-    reducers: {},
+    reducers: {
+        // add employee action & reducer
+        addEmployee: (draft, action) => {
+            draft.employeeList.push(action.payload)
+        },
+    },
 })
 
 export default reducer
