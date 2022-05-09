@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { selectEmployee } from '../select'
 
 /**
@@ -42,7 +43,7 @@ const CurrentEmployees = () => {
                     ))}
                 </tbody>
             </table>
-            <a href="index.html">Home</a>
+            <Link to="/">Home</Link>
         </div>
     )
 }
