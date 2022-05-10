@@ -1,14 +1,15 @@
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { selectEmployee } from '../select'
 import DataTable from 'react-data-table-component'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
 
 /**
- * CurrentEmployees page
+ * Page used to list all employees
  * @component
- * @category CurrentEmployees
+ * @category Employee
  */
-const CurrentEmployees = () => {
+const ListEmployees = () => {
     const employee = useSelector(selectEmployee)
 
     const columns = [
@@ -69,17 +70,20 @@ const CurrentEmployees = () => {
     }
 
     return (
-        <div id="employee-div" className="container">
-            <h1>Current Employees</h1>
-            <DataTable
-                columns={columns}
-                data={getData()}
-                pagination
-                fixedHeader
-            />
-            <Link to="/">Home</Link>
-        </div>
+        <>
+            <Header />
+            <main>
+                <h1>List of all employees</h1>
+                <DataTable
+                    columns={columns}
+                    data={getData()}
+                    pagination
+                    fixedHeader
+                />
+            </main>
+            <Footer />
+        </>
     )
 }
 
-export default CurrentEmployees
+export default ListEmployees

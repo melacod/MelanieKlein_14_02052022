@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import CreateEmployee from './pages/CreateEmployee'
-import CurrentEmployees from './pages/CurrentEmployees'
+import ListEmployees from './pages/ListEmployees'
+import Home from './pages/Home'
 
 /**
  * Application routes
@@ -11,8 +12,9 @@ const AppRouter = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<CreateEmployee />} />
-                <Route path="/employee-list" element={<CurrentEmployees />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/create-employee" element={<CreateEmployee />} />
+                <Route path="/list-employees" element={<ListEmployees />} />
             </Routes>
         </Router>
     )
