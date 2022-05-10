@@ -1,3 +1,5 @@
+import './Header.css'
+
 import Logo from './Logo'
 import Toolbar from './Toolbar'
 

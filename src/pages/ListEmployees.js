@@ -1,8 +1,13 @@
-import { useSelector } from 'react-redux'
-import { selectEmployee } from '../select'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectEmployees } from '../store/Select'
 import DataTable from 'react-data-table-component'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
+import { useEffect } from 'react'
+import { getEmployees } from '../store/EmployeesReducer'
+import Spinner from '../components/Spinner'
+import Error from '../components/Error'
+import Message from '../components/Message'
 
 /**
  * Page used to list all employees
@@ -10,7 +15,15 @@ import Header from '../components/Header'
  * @category Employee
  */
 const ListEmployees = () => {
-    const employee = useSelector(selectEmployee)
+    const dispatch = useDispatch()
+
+    // select employees data from store
+    const employees = useSelector(selectEmployees)
+
+    // call action getEmployees from employees reducer
+    useEffect(() => {
+        dispatch(getEmployees())
+    }, [dispatch])
 
     const columns = [
         {
@@ -65,12 +78,20 @@ const ListEmployees = () => {
             <Header />
             <main>
                 <h1>List of all employees</h1>
-                <DataTable
-                    columns={columns}
-                    data={employee.employeeList}
-                    pagination
-                    fixedHeader
-                />
+                {employees.process.status === 'pending' ? (
+                    <Spinner />
+                ) : employees.process.status === 'rejected' ? (
+                    <Error error={employees.process.error} />
+                ) : employees.list.length === 0 ? (
+                    <Message message={employees.process.message} />
+                ) : (
+                    <DataTable
+                        columns={columns}
+                        data={employees.list}
+                        pagination
+                        fixedHeader
+                    />
+                )}
             </main>
             <Footer />
         </>

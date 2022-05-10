@@ -1,7 +1,8 @@
+import './Toolbar.css'
 import { NavLink } from 'react-router-dom'
 
 /**
- * Toolbar with all links
+ * Application toolbar with all links
  * @component
  * @category Common
  */

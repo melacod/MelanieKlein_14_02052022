@@ -1,14 +1,18 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import DEPARTMENTS from '../constants/departments'
-import STATES from '../constants/states'
-import { addEmployee } from '../features/employee'
+import { useDispatch, useSelector } from 'react-redux'
+import DEPARTMENTS from '../constants/Departments.js'
+import STATES from '../constants/States'
+import { addEmployee } from '../store/EmployeesReducer'
 import { useNavigate } from 'react-router-dom'
 import Calendar from 'react-calendar'
 import { convertDateToString } from '../utils/utils'
 import { Picker } from '@react-native-picker/picker'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
+import { selectEmployees } from '../store/Select.js'
+import Spinner from '../components/Spinner.js'
+import Error from '../components/Error.js'
+import Message from '../components/Message.js'
 
 /**
  * Page used to createa new employee
@@ -18,6 +22,9 @@ import Header from '../components/Header'
 const CreateEmployee = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    // select employees data from store
+    const employees = useSelector(selectEmployees)
 
     // state variables for the form
     const [saved, setSaved] = useState(false)
@@ -75,7 +82,16 @@ const CreateEmployee = () => {
     }
 
     const handleModalClick = () => {
-        navigate('/list-employees')
+        if (employees.process.status === 'pending') {
+            return
+        }
+        if (employees.process.status === 'rejected') {
+            setSaved(false)
+        } else if (!employees.added) {
+            setSaved(false)
+        } else {
+            navigate('/list-employees')
+        }
     }
 
     return (
@@ -200,10 +216,22 @@ const CreateEmployee = () => {
                 onClick={handleModalClick}
             >
                 <div className="content">
-                    <div className="confirm message">Employee Created!</div>
-                    <div className="confirm info">
-                        Click anywhere to see employee list
-                    </div>
+                    {employees.process.status === 'pending' ? (
+                        <Spinner />
+                    ) : employees.process.status === 'rejected' ? (
+                        <Error error={employees.process.error} />
+                    ) : !employees.added ? (
+                        <Message message={employees.process.message} />
+                    ) : (
+                        <>
+                            <div className="confirm message">
+                                Employee created!
+                            </div>
+                            <div className="confirm info">
+                                Click anywhere to see employee list
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
             <Footer />

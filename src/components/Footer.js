@@ -1,3 +1,5 @@
+import './Footer.css'
+
 /**
  * Footer of the application
  * @component

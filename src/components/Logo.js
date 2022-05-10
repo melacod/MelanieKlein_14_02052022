@@ -1,7 +1,9 @@
+import './Logo.css'
+
 import { Link } from 'react-router-dom'
 
 /**
- * Application logo
+ * Logo of the application
  * @component
  * @category Common
  */
