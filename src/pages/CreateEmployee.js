@@ -66,6 +66,7 @@ const CreateEmployee = () => {
                 startDate: convertDateToString(startDate),
                 street,
                 state,
+                city,
                 zipCode,
                 department,
             })

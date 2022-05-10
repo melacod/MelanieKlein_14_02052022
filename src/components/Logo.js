@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 /**
  * Application logo
  * @component
@@ -6,10 +8,12 @@
 const Logo = () => {
     return (
         <div className="logo">
-            <img
-                alt="WealthHealth logo"
-                src={process.env.PUBLIC_URL + '/logo.jpg'}
-            />
+            <Link to="/">
+                <img
+                    alt="WealthHealth logo"
+                    src={process.env.PUBLIC_URL + '/logo.jpg'}
+                />
+            </Link>
         </div>
     )
 }

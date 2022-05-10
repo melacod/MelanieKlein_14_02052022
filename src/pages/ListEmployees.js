@@ -60,15 +60,6 @@ const ListEmployees = () => {
         },
     ]
 
-    const getData = () => {
-        const employeeArray = []
-        employee.employeeList.forEach((emp, idx) => {
-            employeeArray.push({ ...emp })
-        })
-        employeeArray.forEach((emp, idx) => (emp.id = idx))
-        return employeeArray
-    }
-
     return (
         <>
             <Header />
@@ -76,7 +67,7 @@ const ListEmployees = () => {
                 <h1>List of all employees</h1>
                 <DataTable
                     columns={columns}
-                    data={getData()}
+                    data={employee.employeeList}
                     pagination
                     fixedHeader
                 />
