@@ -1,3 +1,5 @@
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import AppRouter from './AppRouter'
 
 /**
@@ -7,9 +9,11 @@ import AppRouter from './AppRouter'
  */
 function App() {
     return (
-        <div className="app">
-            <AppRouter />
-        </div>
+        <LocalizationProvider dateAdapter={AdapterMoment}>
+            <div className="app">
+                <AppRouter />
+            </div>
+        </LocalizationProvider>
     )
 }
 
