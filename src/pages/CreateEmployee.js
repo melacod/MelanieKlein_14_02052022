@@ -13,11 +13,12 @@ import { selectEmployees } from '../store/Select.js'
 import Spinner from '../components/Spinner.js'
 import Error from '../components/Error.js'
 import Message from '../components/Message.js'
+import Modal from '@melacod/react-modal'
 
 import './CreateEmployee.css'
 
 /**
- * Page used to createa new employee
+ * Page used to create new employee
  * @component
  * @category Employee
  */
@@ -209,12 +210,12 @@ const CreateEmployee = () => {
                     Save
                 </button>
             </main>
-            <div
-                id="confirmation"
-                className={saved ? 'modal show' : 'modal hide'}
-                onClick={handleModalClick}
+            <Modal
+                show={saved}
+                title="Information"
+                onClickCloseBtn={handleModalClick}
             >
-                <div className="content">
+                <>
                     {employees.process.status === 'pending' ? (
                         <Spinner />
                     ) : employees.process.status === 'rejected' ? (
@@ -227,12 +228,12 @@ const CreateEmployee = () => {
                                 Employee created!
                             </div>
                             <div className="confirm info">
-                                Click anywhere to see employee list
+                                Close the popup to see employee list
                             </div>
                         </>
                     )}
-                </div>
-            </div>
+                </>
+            </Modal>
             <Footer />
         </>
     )
