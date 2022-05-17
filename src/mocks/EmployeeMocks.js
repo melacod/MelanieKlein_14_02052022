@@ -1,5 +1,5 @@
-import DEPARTMENTS from '../constants/Departments'
-import STATES from '../constants/States'
+import DEPARTMENTS from '../constants/departments'
+import STATES from '../constants/states'
 import { convertDateToString } from '../utils/utils'
 
 /**
