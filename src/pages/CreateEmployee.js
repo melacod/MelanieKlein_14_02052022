@@ -13,8 +13,6 @@ import { selectEmployees } from '../store/Select.js'
 import Spinner from '../components/Spinner.js'
 import Error from '../components/Error.js'
 import Message from '../components/Message.js'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import TextField from '@mui/material/TextField'
 
 /**
  * Page used to createa new employee
@@ -193,38 +191,20 @@ const CreateEmployee = () => {
                     <div>
                         <div>
                             <label htmlFor="date-of-birth">Date of Birth</label>
-                            <DatePicker
-                                disableFuture
-                                label="Date of Birth"
-                                openTo="year"
-                                views={['year', 'month', 'day']}
+                            <Calendar
                                 id="date-of-birth"
-                                onChange={(newValue) => {
-                                    setDateOfBirth(newValue)
-                                }}
+                                onChange={setDateOfBirth}
                                 value={dateOfBirth}
-                                renderInput={(params) => (
-                                    <TextField {...params} />
-                                )}
                             />
                         </div>
                     </div>
                     <div>
                         <div>
                             <label htmlFor="start-date">Start Date</label>
-                            <DatePicker
-                                disableFuture
-                                label="Start Date"
-                                openTo="year"
-                                views={['year', 'month', 'day']}
+                            <Calendar
                                 id="start-date"
-                                onChange={(newValue) => {
-                                    setStartDate(newValue)
-                                }}
+                                onChange={setStartDate}
                                 value={startDate}
-                                renderInput={(params) => (
-                                    <TextField {...params} />
-                                )}
                             />
                         </div>
                     </div>
