@@ -7,3 +7,23 @@ footer {
     border-top: 1px solid green;
     padding-top: 10px;
 }
+
+@media (orientation: landscape) and (max-width: 990px) {
+    footer {
+        top: 93vh;
+    }
+}
+
+@media (orientation: portrait) and (max-width: 990px) {
+    footer {
+        top: 80vh;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    footer {
+        position: relative;
+        top: 0;
+        margin-top: 20px;
+    }
+}

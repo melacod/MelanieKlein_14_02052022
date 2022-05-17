@@ -4,7 +4,7 @@ import DEPARTMENTS from '../constants/departments.js'
 import STATES from '../constants/states'
 import { addEmployee } from '../store/EmployeesReducer'
 import { useNavigate } from 'react-router-dom'
-import Calendar from 'react-calendar'
+import DatePicker from 'react-date-picker'
 import { convertDateToString } from '../utils/utils'
 import { Picker } from '@react-native-picker/picker'
 import Footer from '../components/Footer'
@@ -13,6 +13,8 @@ import { selectEmployees } from '../store/Select.js'
 import Spinner from '../components/Spinner.js'
 import Error from '../components/Error.js'
 import Message from '../components/Message.js'
+
+import './CreateEmployee.css'
 
 /**
  * Page used to createa new employee
@@ -99,7 +101,7 @@ const CreateEmployee = () => {
             <Header />
             <main>
                 <h1>Create a new employee</h1>
-                <form onSubmit={handleSubmit}>
+                <form id="newEmployeeForm" onSubmit={handleSubmit}>
                     <div>
                         <div>
                             <label htmlFor="first-name">First Name</label>
@@ -139,8 +141,22 @@ const CreateEmployee = () => {
                             </Picker>
                         </div>
                         <div>
-                            <button>Save</button>
+                            <label htmlFor="date-of-birth">Date of Birth</label>
+                            <DatePicker
+                                id="date-of-birth"
+                                onChange={setDateOfBirth}
+                                value={dateOfBirth}
+                            />
                         </div>
+                        <div>
+                            <label htmlFor="start-date">Start Date</label>
+                            <DatePicker
+                                id="start-date"
+                                onChange={setStartDate}
+                                value={startDate}
+                            />
+                        </div>
+                        <div></div>
                     </div>
                     <div>
                         <fieldset>
@@ -188,27 +204,10 @@ const CreateEmployee = () => {
                             />
                         </fieldset>
                     </div>
-                    <div>
-                        <div>
-                            <label htmlFor="date-of-birth">Date of Birth</label>
-                            <Calendar
-                                id="date-of-birth"
-                                onChange={setDateOfBirth}
-                                value={dateOfBirth}
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <label htmlFor="start-date">Start Date</label>
-                            <Calendar
-                                id="start-date"
-                                onChange={setStartDate}
-                                value={startDate}
-                            />
-                        </div>
-                    </div>
                 </form>
+                <button type="submit" className="save" form="newEmployeeForm">
+                    Save
+                </button>
             </main>
             <div
                 id="confirmation"
