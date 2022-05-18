@@ -37,7 +37,7 @@ export function addEmployee(employeeToAdd, useMock = 'data') {
         dispatch(actions.fetching())
 
         // Simulate data loading to show spinner
-        await new Promise((r) => setTimeout(r, 2 * 1000))
+        //await new Promise((r) => setTimeout(r, 2 * 1000))
 
         try {
             let dataAddEmployee = {}
@@ -113,7 +113,7 @@ export function getEmployees(useMock = 'data') {
         dispatch(actions.fetching())
 
         // Simulate data loading to show spinner
-        await new Promise((r) => setTimeout(r, 2 * 1000))
+        //await new Promise((r) => setTimeout(r, 2 * 1000))
 
         try {
             let dataGetEmployees = {}
