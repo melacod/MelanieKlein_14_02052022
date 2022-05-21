@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { MOCK_EMPLOYEE_1, MOCK_EMPLOYEES } from '../mocks/EmployeeMocks'
+import { mockAddEmployee, mockGetEmployees } from '../mocks/EmployeeMocks'
 import { selectEmployees } from './Select'
 import BACKEND_URL from './Urls'
 
@@ -23,7 +23,7 @@ const initialState = {
  * @param employeeToAdd the employee to add
  * @category Employee
  */
-export function addEmployee(employeeToAdd, useMock = 'data') {
+export function addEmployee(employeeToAdd) {
     return async (dispatch, getState) => {
         // get current status
         const status = selectEmployees(getState()).process.status
@@ -42,19 +42,12 @@ export function addEmployee(employeeToAdd, useMock = 'data') {
         try {
             let dataAddEmployee = {}
 
-            // if we use mock, don't call backend API
-            if (useMock) {
-                if (useMock === 'error') {
-                    throw new Error('Internal server error')
-                } else if (useMock === 'message') {
-                    dataAddEmployee.status = 400
-                    dataAddEmployee.message = 'Employee already exists'
-                } else {
-                    dataAddEmployee.status = 200
-                    dataAddEmployee.message = 'Employee created'
-                    dataAddEmployee.body = MOCK_EMPLOYEE_1
-                }
-            } else {
+            // call backend API only if mock is not used
+            const mockUsed = await mockAddEmployee(
+                dataAddEmployee,
+                employeeToAdd
+            )
+            if (!mockUsed) {
                 // we call backend API to add the new employee
                 //      => using method PUT
                 //      => with new employee (firstName/lastName/...) in body
@@ -118,19 +111,9 @@ export function getEmployees(useMock = 'data') {
         try {
             let dataGetEmployees = {}
 
-            // if we use mock, don't call backend API
-            if (useMock) {
-                if (useMock === 'error') {
-                    throw new Error('Internal server error')
-                } else if (useMock === 'message') {
-                    dataGetEmployees.status = 404
-                    dataGetEmployees.message = 'No employee found'
-                } else {
-                    dataGetEmployees.status = 200
-                    dataGetEmployees.message = 'All employees retrieved'
-                    dataGetEmployees.body = MOCK_EMPLOYEES
-                }
-            } else {
+            // call backend API only if mock is not used
+            const mockUsed = await mockGetEmployees(dataGetEmployees)
+            if (!mockUsed) {
                 // we call backend API to get all emplopyees
                 //      => using method GET
                 const responseGetEmployees = await fetch(
