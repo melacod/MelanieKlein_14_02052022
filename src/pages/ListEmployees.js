@@ -83,7 +83,7 @@ const ListEmployees = () => {
                 ) : employees.process.status === 'rejected' ? (
                     <Error error={employees.process.error} />
                 ) : employees.list.length === 0 ? (
-                    <Message message={employees.process.message} />
+                    <Message message="No employees found" />
                 ) : (
                     <DataTable
                         columns={columns}

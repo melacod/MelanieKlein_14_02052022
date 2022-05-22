@@ -12,7 +12,6 @@ import Header from '../components/Header'
 import { selectEmployees } from '../store/Select.js'
 import Spinner from '../components/Spinner.js'
 import Error from '../components/Error.js'
-import Message from '../components/Message.js'
 import Modal from '@melacod/react-modal'
 
 import './CreateEmployee.css'
@@ -89,8 +88,6 @@ const CreateEmployee = () => {
             return
         }
         if (employees.process.status === 'rejected') {
-            setSaved(false)
-        } else if (!employees.added) {
             setSaved(false)
         } else {
             navigate('/list-employees')
@@ -220,8 +217,6 @@ const CreateEmployee = () => {
                         <Spinner />
                     ) : employees.process.status === 'rejected' ? (
                         <Error error={employees.process.error} />
-                    ) : !employees.added ? (
-                        <Message message={employees.process.message} />
                     ) : (
                         <>
                             <div className="confirm message">
