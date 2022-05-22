@@ -102,7 +102,7 @@ export function getEmployees() {
 /**
  * Employees state actions and reducers
  * @returns actions and reducers
- * @category UserState
+ * @category EmployeeReducer
  */
 const { actions, reducer } = createSlice({
     name: 'employees',
