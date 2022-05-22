@@ -1,7 +1,7 @@
 /**
  * States
  * @kind constant
- * @category States
+ * @category GlobalConstants
  */
 const STATES = [
     {

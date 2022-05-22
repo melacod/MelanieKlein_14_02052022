@@ -1,7 +1,7 @@
 /**
  * Departments
  * @kind constant
- * @category Departments
+ * @category GlobalConstants
  */
 
 const DEPARTMENTS = [
